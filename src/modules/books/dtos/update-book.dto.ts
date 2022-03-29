@@ -1,23 +1,23 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
-export class AddBookDto {
+export class UpdateBookDto {
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   name: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   description: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   author: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   status: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   url: string;
 }
