@@ -7,6 +7,7 @@ type EnvironmentType = {
   defaultStrategy: string;
   property: string;
   session: string;
+  mongoUri: string;
 };
 
 export const environments = (): EnvironmentType => {
@@ -19,6 +20,7 @@ export const environments = (): EnvironmentType => {
     defaultStrategy: process.env.DEFAULT_STRATEGY,
     property: process.env.PROPERTY_USER,
     session: process.env.SESSION,
+    mongoUri: process.env.MONGODB_URI,
   };
 };
 
