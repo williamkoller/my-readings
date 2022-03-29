@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import envFolderPath, { environments } from '@/config/environments';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BooksModule } from '@/modules/books/books.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -17,6 +18,9 @@ import { BooksModule } from '@/modules/books/books.module';
       useFactory: async (config: ConfigService) => ({
         uri: config.get('mongoUri'),
       }),
+    }),
+    MulterModule.register({
+      dest: './files',
     }),
     forwardRef(() => BooksModule),
   ],
