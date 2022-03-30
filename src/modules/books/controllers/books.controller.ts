@@ -18,6 +18,7 @@ import { UpdateBookDto } from '@/modules/books/dtos/update-book.dto';
 import { UpdateBookService } from '@/modules/books/services/update-book/update-book.service';
 import { DeleteBookService } from '@/modules/books/services/delete-book/delete-book.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { BookOutputType } from '@/modules/books/types/book-output.type';
 
 @ApiTags('books')
 @Controller('books')
@@ -54,7 +55,7 @@ export class BooksController {
     status: HttpStatus.NOT_FOUND,
     description: 'no record found.',
   })
-  async index(): Promise<Book[]> {
+  async index(): Promise<BookOutputType[]> {
     return await this.findAllBooksService.findAll();
   }
 

@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type BookDocument = Book & Document;
 
-@Schema({ timestamps: true })
+@Schema()
 export class Book {
   _id: string;
 
@@ -20,6 +20,12 @@ export class Book {
 
   @Prop({ type: String })
   url: string;
+
+  @Prop({ type: Date, default: Date.now })
+  createdAt: Date;
+
+  @Prop({ type: Date, default: Date.now })
+  updatedAt: Date;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

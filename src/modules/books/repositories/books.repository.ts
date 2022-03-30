@@ -20,13 +20,8 @@ export class BooksRepository {
     return await this.bookModel.find({}, { __v: false });
   }
 
-  async findByName(name: string): Promise<Book[]> {
-    return await this.bookModel.find(
-      {
-        name: { $regex: name, $options: 'i' },
-      },
-      { __v: false },
-    );
+  async findByName(name: string): Promise<Book> {
+    return await this.bookModel.findOne({ name }, { __v: false });
   }
 
   async update(_id: string, updateBookDto: UpdateBookDto): Promise<Book> {
