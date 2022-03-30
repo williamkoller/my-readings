@@ -6,9 +6,6 @@ import {
   Param,
   Post,
   Put,
-  Res,
-  UploadedFile,
-  UseInterceptors,
 } from '@nestjs/common';
 import { AddBookDto } from '@/modules/books/dtos/add-book.dto';
 import { Book } from '@/modules/books/schemas/book.schema';
@@ -18,10 +15,6 @@ import { FindByIdBookService } from '@/modules/books/services/find-by-id/find-by
 import { UpdateBookDto } from '@/modules/books/dtos/update-book.dto';
 import { UpdateBookService } from '@/modules/books/services/update-book/update-book.service';
 import { DeleteBookService } from '@/modules/books/services/delete-book/delete-book.service';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { editFileName } from '@/utils/edit-filename';
-import { imageFileFilter } from '@/utils/image-file-filter';
 
 @Controller('books')
 export class BooksController {
@@ -59,28 +52,5 @@ export class BooksController {
   @Delete(':_id')
   async delete(@Param('_id') _id: string): Promise<{ message: string }> {
     return await this.deleteBookService.delete(_id);
-  }
-
-  @Post('upload')
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: './files',
-        filename: editFileName,
-      }),
-      fileFilter: imageFileFilter,
-    }),
-  )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    const response = {
-      originalname: file.originalname,
-      filename: file.filename,
-    };
-    return response;
-  }
-
-  @Get('image/:imgpath')
-  seeUploadedFile(@Param('imgpath') image, @Res() res) {
-    return res.sendFile(image, { root: './files' });
   }
 }
