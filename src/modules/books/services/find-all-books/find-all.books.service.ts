@@ -10,7 +10,7 @@ export class FindAllBooksService {
     const books = await this.booksRepo.findAll();
 
     if (!books.length) {
-      throw new NotFoundException('No record found.');
+      throw new NotFoundException('no record found.');
     }
 
     return books;
