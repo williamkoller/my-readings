@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Book, BookDocument } from '@/modules/books/schemas/book.schema';
 import { AddBookDto } from '@/modules/books/dtos/add-book.dto';
 import { UpdateBookDto } from '@/modules/books/dtos/update-book.dto';
+import { propertyFalseMongo } from '@/utils/property-false-mongo';
 
 @Injectable()
 export class BooksRepository {
@@ -12,16 +13,16 @@ export class BooksRepository {
   ) {}
 
   async add(addBookDto: AddBookDto): Promise<Book> {
-    const bookCreated = new this.bookModel(addBookDto);
+    const bookCreated = new this.bookModel(addBookDto, propertyFalseMongo);
     return bookCreated.save();
   }
 
   async findAll(): Promise<Book[]> {
-    return await this.bookModel.find({}, { __v: false });
+    return await this.bookModel.find({}, propertyFalseMongo);
   }
 
   async findByName(name: string): Promise<Book> {
-    return await this.bookModel.findOne({ name }, { __v: false });
+    return await this.bookModel.findOne({ name }, propertyFalseMongo);
   }
 
   async update(_id: string, updateBookDto: UpdateBookDto): Promise<Book> {
@@ -30,13 +31,13 @@ export class BooksRepository {
       { $set: updateBookDto },
       {
         new: true,
-        __v: false,
+        propertyFalseMongo,
       },
     );
   }
 
   async findById(_id: string): Promise<Book> {
-    return await this.bookModel.findOne({ _id }, { __v: false });
+    return await this.bookModel.findOne({ _id }, propertyFalseMongo);
   }
 
   async delete(_id: string): Promise<void> {

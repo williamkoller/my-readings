@@ -41,7 +41,7 @@ export class BooksController {
     status: HttpStatus.CONFLICT,
     description: 'there is already a book with that name.',
   })
-  async add(@Body() addBookDto: AddBookDto): Promise<Book> {
+  async add(@Body() addBookDto: AddBookDto): Promise<BookOutputType> {
     return await this.addBookService.add(addBookDto);
   }
 

@@ -13,3 +13,16 @@ export const booksTransform = (books: Book[]): BookOutputType[] => {
     updatedAt: book.updatedAt,
   }));
 };
+
+export const bookTransform = (book: Book): BookOutputType => {
+  return {
+    id: book._id,
+    name: book.name,
+    description: book.description,
+    author: book.author,
+    status: book.status,
+    url: book.url,
+    createdAt: book.updatedAt,
+    updatedAt: book.updatedAt,
+  };
+};
