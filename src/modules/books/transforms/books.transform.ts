@@ -8,6 +8,7 @@ export const booksTransform = (books: Book[]): BookOutputType[] => {
     description: book.description,
     author: book.author,
     status: book.status,
+    url: book.url,
     createdAt: book.updatedAt,
     updatedAt: book.updatedAt,
   }));

@@ -4,6 +4,7 @@ export type BookOutputType = {
   description: string;
   author: string;
   status: string;
+  url: string;
   createdAt: Date;
   updatedAt: Date;
 };
