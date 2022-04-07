@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    entrypoint: sh -c "yarn install && yarn start:dev"
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+    networks:
+      - my_readings_networks
+    volumes:
+      - .:/home/app
+      - /home/app/node-modules
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    ports:
+      - ${PORT}:${PORT}
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+    volumes:
+      - data:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - my_readings_networks
+
+volumes:
+  data:
+
+networks:
+  my_readings_networks:
