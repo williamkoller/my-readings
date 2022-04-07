@@ -1,5 +1,6 @@
 import envFolderPath, { environments } from '@/config/environments';
 import { BooksModule } from '@/modules/books/books.module';
+import { UsersModule } from '@/modules/users/users.module';
 import { forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -18,4 +19,5 @@ export const imports = [
     }),
   }),
   forwardRef(() => BooksModule),
+  forwardRef(() => UsersModule),
 ];
