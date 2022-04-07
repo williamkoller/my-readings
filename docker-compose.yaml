@@ -11,8 +11,8 @@ services:
     networks:
       - my_readings_networks
     volumes:
-      - .:/home/app
-      - /home/app/node-modules
+      - .:/app/
+      - /app/node_modules
     depends_on:
       - mongodb
     links:
