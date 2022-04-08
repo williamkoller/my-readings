@@ -117,4 +117,15 @@ response
 }
 ```
 
+Next step:
+- [ ] add nginx for proxy reverse
+- [ ] add authentication with JWT
+- [ ] add routes authenticated
+- [ ] add makefile for automatization commands
+- [ ] add AWS S3 for Upload files
+- [ ] add Redis for cache some endpoints
+- [ ] add logs module
+- [ ] add GraphQL
+- [ ] add file procfile for deploy heroku
+
 Made with 🖤 by [williamkoller](https://github.com/williamkoller) :wave:
