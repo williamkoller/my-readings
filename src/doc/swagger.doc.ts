@@ -6,6 +6,7 @@ export const swagger = (app: NestExpressApplication): void => {
     .setTitle('My Readings Example')
     .setDescription('My Readings API description')
     .setVersion('0.0.1')
+    .addTag('auth')
     .addTag('books')
     .addTag('users')
     .build();
