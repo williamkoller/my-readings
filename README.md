@@ -118,7 +118,7 @@ response
 ```
 
 Next step:
-- [ ] add nginx for proxy reverse
+- [x] add nginx for proxy reverse
 - [ ] add authentication with JWT
 - [ ] add routes authenticated
 - [ ] add makefile for automatization commands
