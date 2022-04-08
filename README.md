@@ -1,3 +1,9 @@
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/williamkoller/my-readings)
+![GitHub top language](https://img.shields.io/github/languages/top/williamkoller/my-readings)
+![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/williamkoller/my-readings)
+[![CodeQL](https://github.com/williamkoller/my-readings/workflows/CodeQL/badge.svg)](https://github.com/williamkoller/my-readings/actions?query=workflow%3ACodeQL)
+![GitHub issues](https://img.shields.io/github/issues/williamkoller/my-readings)
+
 <img src="./img/books.png" height="220" width="290" align="right"/>
 
 ## My Readings
