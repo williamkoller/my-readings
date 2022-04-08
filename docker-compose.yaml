@@ -32,6 +32,17 @@ services:
     networks:
       - my_readings_networks
 
+  nginx:
+    container_name: nginx
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - 8080:80
+    networks:
+      - my_readings_networks
+
 volumes:
   data:
 
