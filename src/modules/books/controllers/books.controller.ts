@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { AddBookDto } from '@/modules/books/dtos/add-book.dto';
 import { Book } from '@/modules/books/schemas/book.schema';
@@ -19,9 +20,11 @@ import { UpdateBookService } from '@/modules/books/services/update-book/update-b
 import { DeleteBookService } from '@/modules/books/services/delete-book/delete-book.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BookOutputType } from '@/modules/books/types/book-output.type';
+import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 
 @ApiTags('books')
 @Controller('books')
+@UseGuards(JwtAuthGuard)
 export class BooksController {
   constructor(
     private readonly addBookService: AddBookService,
