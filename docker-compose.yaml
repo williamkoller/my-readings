@@ -1,10 +1,10 @@
 version: '3.8'
 services:
-  api:
+  backend_my_readings:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: api
+    container_name: backend_my_readings
     entrypoint: sh -c "yarn install && yarn start:dev"
     environment:
       MONGODB_URI: ${MONGODB_URI}
@@ -39,7 +39,7 @@ services:
       context: .
       dockerfile: Dockerfile.nginx
     ports:
-      - 8080:80
+      - 8080:8080
     networks:
       - my_readings_networks
 
