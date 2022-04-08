@@ -7,6 +7,7 @@ export const swagger = (app: NestExpressApplication): void => {
     .setDescription('My Readings API description')
     .setVersion('0.0.1')
     .addTag('books')
+    .addTag('users')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
