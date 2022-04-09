@@ -1,5 +1,6 @@
 import envFolderPath, { environments } from '@/config/environments';
 import { AuthModule } from '@/modules/auth/auth.module';
+import { AwsModule } from '@/modules/aws/aws.module';
 import { BooksModule } from '@/modules/books/books.module';
 import { UsersModule } from '@/modules/users/users.module';
 import { forwardRef } from '@nestjs/common';
@@ -22,4 +23,5 @@ export const imports = [
   forwardRef(() => BooksModule),
   forwardRef(() => UsersModule),
   forwardRef(() => AuthModule),
+  forwardRef(() => AwsModule),
 ];

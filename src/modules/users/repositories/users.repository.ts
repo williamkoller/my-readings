@@ -29,4 +29,18 @@ export class UsersRepository {
       .find({}, propertyFalseMongo)
       .select('-password');
   }
+
+  async uploadFile(_id: string, avatar: string): Promise<User> {
+    return await this.userModel.findOneAndUpdate(
+      { _id },
+      {
+        avatar,
+        updatedAt: Date.now(),
+      },
+      {
+        new: true,
+        propertyFalseMongo,
+      },
+    );
+  }
 }
