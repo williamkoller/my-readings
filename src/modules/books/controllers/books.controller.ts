@@ -1,10 +1,12 @@
 import {
   Body,
+  CACHE_MANAGER,
   Controller,
   Delete,
   Get,
   HttpCode,
   HttpStatus,
+  Inject,
   Param,
   Post,
   Put,
@@ -21,6 +23,7 @@ import { DeleteBookService } from '@/modules/books/services/delete-book/delete-b
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BookOutputType } from '@/modules/books/types/book-output.type';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
+import { Cache } from 'cache-manager';
 
 @ApiTags('books')
 @Controller('books')
@@ -32,6 +35,7 @@ export class BooksController {
     private readonly findByIdBookService: FindByIdBookService,
     private readonly updateBookService: UpdateBookService,
     private readonly deleteBookService: DeleteBookService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   @Post()
@@ -103,5 +107,10 @@ export class BooksController {
   })
   async delete(@Param('_id') _id: string): Promise<{ message: string }> {
     return await this.deleteBookService.delete(_id);
+  }
+
+  @Get('cached/:key')
+  async cacheBook(@Param('key') key: string): Promise<string> {
+    return await this.cacheManager.get(key);
   }
 }

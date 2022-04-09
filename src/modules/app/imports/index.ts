@@ -6,6 +6,7 @@ import { UsersModule } from '@/modules/users/users.module';
 import { forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CacheModule } from '@nestjs/common';
 
 export const imports = [
   ConfigModule.forRoot({
@@ -20,6 +21,7 @@ export const imports = [
       uri: config.get('mongoUri'),
     }),
   }),
+  CacheModule.register(),
   forwardRef(() => BooksModule),
   forwardRef(() => UsersModule),
   forwardRef(() => AuthModule),

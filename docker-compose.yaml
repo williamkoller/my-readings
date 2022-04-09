@@ -8,6 +8,8 @@ services:
     entrypoint: sh -c "yarn install && yarn start:dev"
     environment:
       MONGODB_URI: ${MONGODB_URI}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
     networks:
       - my_readings_networks
     volumes:
@@ -15,6 +17,8 @@ services:
       - /app/node_modules
     depends_on:
       - mongodb
+      - redis
+      - nginx
     links:
       - mongodb
     ports:
@@ -43,8 +47,25 @@ services:
     networks:
       - my_readings_networks
 
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PORT=6379
+      - REDIS_HOST=localhost
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    hostname: ${REDIS_HOST}
+    networks:
+      - my_readings_networks
+    volumes:
+      - cache:/data
+
 volumes:
   data:
+  cache:
 
 networks:
   my_readings_networks:
