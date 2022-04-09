@@ -126,8 +126,8 @@ response
 Next step:
 - [x] add nginx for proxy reverse
 - [x] add authentication with JWT
-- [ ] add routes authenticated
-- [ ] add makefile for automatization commands
+- [x] add routes authenticated
+- [x] add makefile for automatization commands
 - [ ] add AWS S3 for Upload files
 - [ ] add Redis for cache some endpoints
 - [ ] add logs module
