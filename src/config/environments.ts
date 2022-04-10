@@ -14,7 +14,7 @@ export const environments = (): EnvironmentType => {
   return {
     nodeEnv: process.env.NODE_ENV,
     appUrl: process.env.APP_URL,
-    port: +process.env.PORT,
+    port: Number(process.env.PORT),
     secret: process.env.JWT_SECRET,
     expiresIn: process.env.JWT_EXPIRES_IN,
     defaultStrategy: process.env.DEFAULT_STRATEGY,
