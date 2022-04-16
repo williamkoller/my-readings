@@ -62,7 +62,7 @@ export class BooksController {
     status: HttpStatus.NOT_FOUND,
     description: 'no record found.',
   })
-  async index(): Promise<BookOutputType[]> {
+  async index(): Promise<BookOutputType[] | string> {
     return await this.findAllBooksService.findAll();
   }
 
@@ -109,8 +109,24 @@ export class BooksController {
     return await this.deleteBookService.delete(_id);
   }
 
-  @Get('cached/:key')
-  async cacheBook(@Param('key') key: string): Promise<string> {
-    return await this.cacheManager.get(key);
+  @Get('cached/in-memory')
+  async cacheBook(): Promise<any> {
+    const myFakeDB = 'naveen';
+    const value = await this.cacheManager.get('cache');
+    console.log(value);
+
+    if (value) {
+      return {
+        dataFrom: 'In-memory cache',
+        name: value,
+      };
+    }
+
+    await this.cacheManager.set('cache', myFakeDB, { ttl: 1000 });
+
+    return {
+      dataFrom: 'Fake database',
+      name: myFakeDB,
+    };
   }
 }

@@ -1,0 +1,1 @@
+export const GET_BOOKS_CACHE_KEY = 'GET_BOOKS_CACHE';
