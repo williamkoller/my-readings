@@ -15,12 +15,18 @@ export class FindAllBooksService {
   async findAll(): Promise<BookOutputType[] | string> {
     const cache = await this.cacheManagement.getCache(GET_BOOKS_CACHE_KEY);
 
-    console.log('cache', cache);
-
     if (cache) {
       return cache;
     }
+
     const books = await this.booksRepo.findAll();
+
+    await this.cacheManagement.clearCache();
+
+    await this.cacheManagement.addCache(
+      GET_BOOKS_CACHE_KEY,
+      booksTransform(books),
+    );
 
     if (!books.length) {
       throw new NotFoundException('no record found.');
