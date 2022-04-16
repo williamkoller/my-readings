@@ -8,10 +8,12 @@ services:
     entrypoint: sh -c "yarn install && yarn start:dev"
     environment:
       MONGODB_URI: ${MONGODB_URI}
+      MONGODB_PORT: ${MONGODB_PORT}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
+      NGINX_PORT: ${NGINX_PORT}
     networks:
-      - my_readings_networks
+      - nodeserver_network
     volumes:
       - .:/app/
       - /app/node_modules
@@ -32,9 +34,9 @@ services:
     volumes:
       - data:/data/db
     ports:
-      - '27017:27017'
+      - ${MONGODB_PORT}:${MONGODB_PORT}
     networks:
-      - my_readings_networks
+      - nodeserver_network
 
   nginx:
     container_name: nginx
@@ -43,9 +45,9 @@ services:
       context: .
       dockerfile: Dockerfile.nginx
     ports:
-      - 8080:8080
+      - 8080:${NGINX_PORT}
     networks:
-      - my_readings_networks
+      - nodeserver_network
 
   redis:
     image: redis:latest
@@ -59,7 +61,7 @@ services:
       - ${REDIS_PORT}:${REDIS_PORT}
     hostname: ${REDIS_HOST}
     networks:
-      - my_readings_networks
+      - nodeserver_network
     volumes:
       - cache:/data
 
@@ -68,4 +70,4 @@ volumes:
   cache:
 
 networks:
-  my_readings_networks:
+  nodeserver_network:
