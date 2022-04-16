@@ -1,10 +1,10 @@
 version: '3.8'
 services:
-  backend_my_readings:
+  nodeserver:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: backend_my_readings
+    container_name: nodeserver
     entrypoint: sh -c "yarn install && yarn start:dev"
     environment:
       MONGODB_URI: ${MONGODB_URI}
