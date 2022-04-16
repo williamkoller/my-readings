@@ -21,7 +21,10 @@ export class AddBookService {
     }
     const bookCreated = await this.booksRepo.add(addBookDto);
 
-    await this.cacheManagement.addCache(GET_BOOKS_CACHE_KEY, addBookDto);
+    await this.cacheManagement.addCache(
+      GET_BOOKS_CACHE_KEY,
+      bookTransform(bookCreated),
+    );
     return bookTransform(bookCreated);
   }
 }
