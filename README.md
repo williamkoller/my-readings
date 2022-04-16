@@ -146,6 +146,10 @@ Next step:
 - [x] add makefile for automatization commands
 - [x] add AWS S3 for Upload files
 - [x] add Redis for cache some endpoints
+- [ ] add cron job
+- [ ] add queue with bull
+- [ ] add rate limiting
+- [ ] add logging
 - [ ] add logs module
 - [ ] add GraphQL
 - [ ] add file procfile for deploy heroku
