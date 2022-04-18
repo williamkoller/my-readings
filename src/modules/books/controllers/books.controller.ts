@@ -62,7 +62,7 @@ export class BooksController {
     status: HttpStatus.NOT_FOUND,
     description: 'no record found.',
   })
-  async index(): Promise<BookOutputType[] | string> {
+  async index(): Promise<BookOutputType[] | number> {
     return await this.findAllBooksService.findAll();
   }
 
