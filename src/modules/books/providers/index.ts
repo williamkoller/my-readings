@@ -5,6 +5,7 @@ import { FindAllBooksService } from '@/modules/books/services/find-all-books/fin
 import { FindByIdBookService } from '@/modules/books/services/find-by-id/find-by-id-book.service';
 import { UpdateBookService } from '@/modules/books/services/update-book/update-book.service';
 import { CachesRepository } from '@/modules/cache/repositories/caches.repository';
+import { BooksCountService } from '@/modules/books/services/books-count/books-count.service';
 
 export const providers = [
   BooksRepository,
@@ -14,4 +15,5 @@ export const providers = [
   UpdateBookService,
   DeleteBookService,
   CachesRepository,
+  BooksCountService,
 ];
