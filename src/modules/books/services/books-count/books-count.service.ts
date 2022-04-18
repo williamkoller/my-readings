@@ -1,9 +1,10 @@
 import { GET_BOOKS_CACHE_KEY } from '@/modules/cache/constants/books-cache-key.constant';
 import { CachesRepository } from '@/modules/cache/repositories/caches.repository';
-import { Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Interval } from '@nestjs/schedule';
 import { BooksRepository } from '@/modules/books/repositories/books.repository';
 
+@Injectable()
 export class BooksCountService {
   private logger = new Logger(BooksCountService.name);
   private limit = 10;
