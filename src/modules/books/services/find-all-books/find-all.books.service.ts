@@ -2,18 +2,18 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { BooksRepository } from '@/modules/books/repositories/books.repository';
 import { booksTransform } from '@/modules/books/transforms/books.transform';
 import { BookOutputType } from '@/modules/books/types/book-output.type';
-import { CacheManagement } from '@/utils/cache/cache-management';
-import { GET_BOOKS_CACHE_KEY } from '@/utils/cache/books-cache-key.constant';
+import { CachesRepository } from '@/modules/cache/repositories/caches.repository';
+import { GET_BOOKS_CACHE_KEY } from '@/modules/cache/constants/books-cache-key.constant';
 
 @Injectable()
 export class FindAllBooksService {
   constructor(
     private readonly booksRepo: BooksRepository,
-    private readonly cacheManagement: CacheManagement,
+    private readonly cachesRepository: CachesRepository,
   ) {}
 
   async findAll(): Promise<BookOutputType[] | string> {
-    const cache = await this.cacheManagement.getCache(GET_BOOKS_CACHE_KEY);
+    const cache = await this.cachesRepository.getCache(GET_BOOKS_CACHE_KEY);
 
     if (cache) {
       return cache;
@@ -21,9 +21,9 @@ export class FindAllBooksService {
 
     const books = await this.booksRepo.findAll();
 
-    await this.cacheManagement.clearCache();
+    await this.cachesRepository.clearCache();
 
-    await this.cacheManagement.addCache(
+    await this.cachesRepository.setCache(
       GET_BOOKS_CACHE_KEY,
       booksTransform(books),
     );

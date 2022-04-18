@@ -3,14 +3,14 @@ import { AddBookDto } from '@/modules/books/dtos/add-book.dto';
 import { BooksRepository } from '@/modules/books/repositories/books.repository';
 import { BookOutputType } from '@/modules/books/types/book-output.type';
 import { bookTransform } from '@/modules/books/transforms/books.transform';
-import { CacheManagement } from '@/utils/cache/cache-management';
-import { GET_BOOKS_CACHE_KEY } from '@/utils/cache/books-cache-key.constant';
+import { CachesRepository } from '@/modules/cache/repositories/caches.repository';
+import { GET_BOOKS_CACHE_KEY } from '@/modules/cache/constants/books-cache-key.constant';
 
 @Injectable()
 export class AddBookService {
   constructor(
     private readonly booksRepo: BooksRepository,
-    private readonly cacheManagement: CacheManagement,
+    private readonly cachesRepository: CachesRepository,
   ) {}
 
   async add(addBookDto: AddBookDto): Promise<BookOutputType> {
@@ -21,7 +21,7 @@ export class AddBookService {
     }
     const bookCreated = await this.booksRepo.add(addBookDto);
 
-    await this.cacheManagement.addCache(
+    await this.cachesRepository.setCache(
       GET_BOOKS_CACHE_KEY,
       bookTransform(bookCreated),
     );

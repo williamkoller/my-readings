@@ -6,8 +6,7 @@ import { UsersModule } from '@/modules/users/users.module';
 import { forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CacheModule } from '@nestjs/common';
-import * as redisStore from 'cache-manager-redis-store';
+import { CacheModule } from '@/modules/cache/cache.module';
 
 export const imports = [
   ConfigModule.forRoot({
@@ -22,18 +21,9 @@ export const imports = [
       uri: config.get('mongoUri'),
     }),
   }),
-  CacheModule.registerAsync({
-    imports: [ConfigModule],
-    inject: [ConfigService],
-    useFactory: async (config: ConfigService) => ({
-      store: redisStore,
-      host: config.get('redisHost'),
-      port: config.get('redisPort'),
-      ttl: 60 * 3600 * 1000,
-    }),
-  }),
   forwardRef(() => BooksModule),
   forwardRef(() => UsersModule),
   forwardRef(() => AuthModule),
   forwardRef(() => AwsModule),
+  forwardRef(() => CacheModule),
 ];

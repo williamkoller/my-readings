@@ -4,7 +4,7 @@ import { DeleteBookService } from '@/modules/books/services/delete-book/delete-b
 import { FindAllBooksService } from '@/modules/books/services/find-all-books/find-all.books.service';
 import { FindByIdBookService } from '@/modules/books/services/find-by-id/find-by-id-book.service';
 import { UpdateBookService } from '@/modules/books/services/update-book/update-book.service';
-import { CacheManagement } from '@/utils/cache/cache-management';
+import { CachesRepository } from '@/modules/cache/repositories/caches.repository';
 
 export const providers = [
   BooksRepository,
@@ -13,5 +13,5 @@ export const providers = [
   FindByIdBookService,
   UpdateBookService,
   DeleteBookService,
-  CacheManagement,
+  CachesRepository,
 ];
