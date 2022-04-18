@@ -8,6 +8,7 @@ import { GET_BOOKS_CACHE_KEY } from '@/modules/cache/constants/books-cache-key.c
 
 @Injectable()
 export class AddBookService {
+  private TEN_MINUTES = 10;
   constructor(
     private readonly booksRepo: BooksRepository,
     private readonly cachesRepository: CachesRepository,
@@ -24,6 +25,7 @@ export class AddBookService {
     await this.cachesRepository.setCache(
       GET_BOOKS_CACHE_KEY,
       bookTransform(bookCreated),
+      this.TEN_MINUTES,
     );
     return bookTransform(bookCreated);
   }
