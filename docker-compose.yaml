@@ -20,7 +20,6 @@ services:
     depends_on:
       - mongodb
       - redis
-      - nginx
     links:
       - mongodb
     ports:
@@ -40,12 +39,14 @@ services:
 
   nginx:
     container_name: nginx
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile.nginx
     ports:
       - 8080:${NGINX_PORT}
+    links:
+      - nodeserver
     networks:
       - nodeserver_network
 
