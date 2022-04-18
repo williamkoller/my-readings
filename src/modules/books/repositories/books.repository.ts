@@ -43,4 +43,8 @@ export class BooksRepository {
   async delete(_id: string): Promise<void> {
     await this.bookModel.deleteOne({ _id });
   }
+
+  async countBooks(offset: number, limit: number): Promise<any> {
+    return await this.bookModel.find().skip(offset).limit(limit);
+  }
 }

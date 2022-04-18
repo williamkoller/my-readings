@@ -7,6 +7,7 @@ import { forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CacheModule } from '@/modules/cache/cache.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 export const imports = [
   ConfigModule.forRoot({
@@ -21,6 +22,7 @@ export const imports = [
       uri: config.get('mongoUri'),
     }),
   }),
+  ScheduleModule.forRoot(),
   forwardRef(() => BooksModule),
   forwardRef(() => UsersModule),
   forwardRef(() => AuthModule),
