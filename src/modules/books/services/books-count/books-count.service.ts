@@ -3,6 +3,13 @@ import { CachesRepository } from '@/modules/cache/repositories/caches.repository
 import { Injectable, Logger } from '@nestjs/common';
 import { Interval } from '@nestjs/schedule';
 import { BooksRepository } from '@/modules/books/repositories/books.repository';
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
+import { Book } from '@/modules/books/schemas/book.schema';
+
+type BookType = {
+  toJSON(): Book;
+};
 
 @Injectable()
 export class BooksCountService {
@@ -12,6 +19,8 @@ export class BooksCountService {
   constructor(
     private readonly booksRepository: BooksRepository,
     private readonly cachesRepository: CachesRepository,
+    @InjectQueue('books')
+    private readonly booksQueue: Queue,
   ) {}
 
   @Interval(5000)
@@ -38,5 +47,8 @@ export class BooksCountService {
     }
 
     this.logger.log(`found ${this.limit} books`);
+    this.booksQueue.add({
+      books: countBooks.map((book: BookType) => book.toJSON()),
+    });
   }
 }
