@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   Param,
   Post,
   UploadedFile,
@@ -13,7 +14,7 @@ import { User } from '@/modules/users/schemas/user.schema';
 import { AddUserService } from '@/modules/users/services/add-user/add-user.service';
 import { FindAllUsersService } from '../services/find-all-users/find-all-users.service';
 import { FindUserByIdService } from '../services/find-user-by-id/find-user-by-id.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBasicAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadAvatarService } from '../services/upload-avatar/upload-avatar.service';
@@ -29,25 +30,60 @@ export class UsersController {
   ) {}
 
   @Post('sign-up')
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'add new user.',
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'there is already a user with that email.',
+  })
   async store(@Body() addUserDto: AddUserDto): Promise<User> {
     return await this.addUSerService.newUser(addUserDto);
   }
 
   @Get()
+  @ApiBasicAuth()
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'find all users.',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'no record found.',
+  })
   @UseGuards(JwtAuthGuard)
   async index(): Promise<User[]> {
     return await this.findAllUsersService.findAll();
   }
 
   @Get(':_id')
+  @ApiBasicAuth()
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'find users by id.',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'user not found.',
+  })
   @UseGuards(JwtAuthGuard)
   async show(@Param('_id') _id: string): Promise<User> {
     return await this.findUserByIdService.findUserById(_id);
   }
 
   @Post('/:_id/upload')
-  @UseGuards(JwtAuthGuard)
+  @ApiBasicAuth()
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'upload file S3',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'user not found.',
+  })
   @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(JwtAuthGuard)
   async upload(
     @UploadedFile() file: any,
     @Param('_id') _id: string,

@@ -20,13 +20,14 @@ import { FindByIdBookService } from '@/modules/books/services/find-by-id/find-by
 import { UpdateBookDto } from '@/modules/books/dtos/update-book.dto';
 import { UpdateBookService } from '@/modules/books/services/update-book/update-book.service';
 import { DeleteBookService } from '@/modules/books/services/delete-book/delete-book.service';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBasicAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BookOutputType } from '@/modules/books/types/book-output.type';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 import { Cache } from 'cache-manager';
 import { ProcessBook } from '../process/books.process';
 
 @ApiTags('books')
+@ApiBasicAuth()
 @Controller('books')
 @UseGuards(JwtAuthGuard)
 export class BooksController {
@@ -111,33 +112,16 @@ export class BooksController {
     return await this.deleteBookService.delete(_id);
   }
 
-  @Get('cached/in-memory')
-  async cacheBook(): Promise<any> {
-    const myFakeDB = 'naveen';
-    const value = await this.cacheManager.get('cache');
-    console.log(value);
-
-    if (value) {
-      return {
-        dataFrom: 'In-memory cache',
-        name: value,
-      };
-    }
-
-    await this.cacheManager.set('cache', myFakeDB, { ttl: 1000 });
-
-    return {
-      dataFrom: 'Fake database',
-      name: myFakeDB,
-    };
-  }
-
   @Post('process_books')
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'process book in queue.',
+  })
   async process(@Body() addBookDto: AddBookDto): Promise<{ message: string }> {
     await this.processBook.process(addBookDto);
 
     return {
-      message: 'book has process..',
+      message: 'book has processing..',
     };
   }
 }

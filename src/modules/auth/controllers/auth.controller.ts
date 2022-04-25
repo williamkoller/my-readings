@@ -12,11 +12,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Sign In',
+    description: 'sign In',
   })
   @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
-    description: 'User unauthorized.',
+    description: 'user unauthorized.',
   })
   public async login(
     @Body() authInputDto: AuthInputDto,
