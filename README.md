@@ -28,7 +28,7 @@ Next step:
 - [x] add cron job
 - [x] add queue with bull
 - [x] add rate limiting
-- [ ] add logging
+- [x] add logging
 - [ ] add logs module
 - [ ] add GraphQL
 - [ ] add file procfile for deploy heroku
