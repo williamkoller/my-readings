@@ -28,7 +28,7 @@ export class UsersController {
     private readonly uploadAvatarService: UploadAvatarService,
   ) {}
 
-  @Post()
+  @Post('sign-up')
   async store(@Body() addUserDto: AddUserDto): Promise<User> {
     return await this.addUSerService.newUser(addUserDto);
   }

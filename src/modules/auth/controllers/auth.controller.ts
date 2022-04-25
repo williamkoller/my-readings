@@ -8,11 +8,11 @@ import { AuthService } from '@/modules/auth/services/auth.service';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('login')
+  @Post('sign-in')
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Logging user',
+    description: 'Sign In',
   })
   @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
