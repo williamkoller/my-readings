@@ -26,7 +26,7 @@ Next step:
 - [x] add AWS S3 for Upload files
 - [x] add Redis for cache some endpoints
 - [x] add cron job
-- [ ] add queue with bull
+- [x] add queue with bull
 - [ ] add rate limiting
 - [ ] add logging
 - [ ] add logs module
