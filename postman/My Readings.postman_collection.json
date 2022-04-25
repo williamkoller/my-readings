@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "d624e663-5b80-4a30-8c0f-71de5e00d020",
+		"name": "My Readings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Add Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Minimalisno Digital\",\n  \"description\": \"Para uma vida profunda em um mundo artificial\",\n  \"author\": \"Cal Newport\",\n  \"status\": \"pending\",\n  \"url\": \"https://url-fake/img.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-my-readings}}/books",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n  books {\n    id\n    name\n    description\n    author\n    status\n    url\n    createdAt\n    updatedAt\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{url-my-readings}}/books",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-my-readings}}/books/624ed687c615a80d008dd907",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"books",
+								"624ed687c615a80d008dd907"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detele Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url-my-readings}}/books/625adb96662312319cbf0707",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"books",
+								"625adb96662312319cbf0707"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"url\": \"https://url-fake.com/img.png\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-my-readings}}/books/624e2085a25ae260f044098a",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"books",
+								"624e2085a25ae260f044098a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"William\",\n  \"surname\": \"Koller\",\n  \"email\": \"williamkoller404@gmail.com\",\n  \"password\": \"q1w2e3r4t5\",\n  \"age\": 32\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-my-readings}}/users",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-my-readings}}/users",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-my-readings}}/users/624f7e1fd17115c053dc66f0",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"users",
+								"624f7e1fd17115c053dc66f0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/william/Downloads/eu.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url-my-readings}}/users/624f7e1fd17115c053dc66f0/upload",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"users",
+								"624f7e1fd17115c053dc66f0",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();",
+									"pm.environment.set('accessToken', res.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"williamkoller404@gmail.com\",\n  \"password\": \"q1w2e3r4t5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-my-readings}}/auth/login",
+							"host": [
+								"{{url-my-readings}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
