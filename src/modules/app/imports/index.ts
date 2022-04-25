@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CacheModule } from '@/modules/cache/cache.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 export const imports = [
   ConfigModule.forRoot({
@@ -28,4 +29,8 @@ export const imports = [
   forwardRef(() => AuthModule),
   forwardRef(() => AwsModule),
   forwardRef(() => CacheModule),
+  ThrottlerModule.forRoot({
+    ttl: 60,
+    limit: 10,
+  }),
 ];

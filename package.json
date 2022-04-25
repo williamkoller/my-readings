@@ -31,6 +31,7 @@
     "@nestjs/platform-express": "^8.4.4",
     "@nestjs/schedule": "^1.1.0",
     "@nestjs/swagger": "^5.2.1",
+    "@nestjs/throttler": "^2.0.1",
     "aws-sdk": "^2.1120.0",
     "bcrypt": "^5.0.1",
     "bull": "^4.8.2",
