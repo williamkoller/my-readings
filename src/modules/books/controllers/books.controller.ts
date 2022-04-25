@@ -24,6 +24,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BookOutputType } from '@/modules/books/types/book-output.type';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 import { Cache } from 'cache-manager';
+import { ProcessBook } from '../process/books.process';
 
 @ApiTags('books')
 @Controller('books')
@@ -36,6 +37,7 @@ export class BooksController {
     private readonly updateBookService: UpdateBookService,
     private readonly deleteBookService: DeleteBookService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly processBook: ProcessBook,
   ) {}
 
   @Post()
@@ -127,6 +129,15 @@ export class BooksController {
     return {
       dataFrom: 'Fake database',
       name: myFakeDB,
+    };
+  }
+
+  @Post('process_books')
+  async process(@Body() addBookDto: AddBookDto): Promise<{ message: string }> {
+    await this.processBook.process(addBookDto);
+
+    return {
+      message: 'book has process..',
     };
   }
 }
