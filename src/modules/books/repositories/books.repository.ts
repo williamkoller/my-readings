@@ -28,7 +28,7 @@ export class BooksRepository {
   async update(_id: string, updateBookDto: UpdateBookDto): Promise<Book> {
     return await this.bookModel.findOneAndUpdate(
       { _id: { $eq: _id } },
-      { $eq: updateBookDto },
+      { $regex: /updateBookDto/ },
       {
         new: true,
         propertyFalseMongo,
