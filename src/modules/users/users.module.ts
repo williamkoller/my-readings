@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-import { imports } from '@/modules/users/imports';
-import { providers } from '@/modules/users/providers';
-import { controllers } from '@/modules/users/controllers';
+import {
+  controllers,
+  imports,
+  providers,
+} from '@/modules/users/users.settings';
 
 @Module({
-  imports,
   controllers,
+  imports,
   providers,
 })
 export class UsersModule {}

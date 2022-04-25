@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-import { controllers } from '@/modules/books/controllers';
-import { providers } from '@/modules/books/providers';
-import { imports } from '@/modules/books/imports';
+import {
+  controllers,
+  imports,
+  providers,
+} from '@/modules/books/books.settings';
 
 @Module({
-  imports,
   controllers,
+  imports,
   providers,
 })
 export class BooksModule {}
