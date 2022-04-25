@@ -3,6 +3,8 @@ import { Book, BookSchema } from '@/modules/books/schemas/book.schema';
 import { CacheModule } from '@nestjs/common';
 import { BullModule } from '@nestjs/bull';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 export const imports = [
   MongooseModule.forFeature([
@@ -22,5 +24,9 @@ export const imports = [
         port: config.get('redisPort'),
       },
     }),
+  }),
+  GraphQLModule.forRoot<ApolloDriverConfig>({
+    driver: ApolloDriver,
+    autoSchemaFile: true,
   }),
 ];

@@ -8,6 +8,7 @@ import { CachesRepository } from '@/modules/cache/repositories/caches.repository
 import { BooksCountService } from '@/modules/books/services/books-count/books-count.service';
 import { FindBookByNameService } from '@/modules/books/services/find-book-by-name/find-book-by-name.service';
 import { ProcessBook } from '@/modules/books/process/books.process';
+import { BookResolver } from '../resolver/books.resolver';
 
 export const providers = [
   BooksRepository,
@@ -20,4 +21,5 @@ export const providers = [
   BooksCountService,
   FindBookByNameService,
   ProcessBook,
+  BookResolver,
 ];
