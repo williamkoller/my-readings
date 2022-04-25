@@ -27,7 +27,7 @@ Next step:
 - [x] add Redis for cache some endpoints
 - [x] add cron job
 - [x] add queue with bull
-- [ ] add rate limiting
+- [x] add rate limiting
 - [ ] add logging
 - [ ] add logs module
 - [ ] add GraphQL
