@@ -29,7 +29,7 @@ export class BooksCountService {
 
     offset = offset === undefined ? 0 : offset;
 
-    this.logger.log(`offset ${offset}`);
+    this.logger.log(`offset ${offset}.`);
 
     const countBooks = await this.booksRepository.countBooks(
       offset,
@@ -46,7 +46,7 @@ export class BooksCountService {
       );
     }
 
-    this.logger.log(`found ${this.limit} books`);
+    this.logger.log(`found ${this.limit} books.`);
     this.booksQueue.add({
       books: countBooks.map((book: BookType) => book.toJSON()),
     });

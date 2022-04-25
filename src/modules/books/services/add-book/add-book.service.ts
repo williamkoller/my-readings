@@ -18,7 +18,7 @@ export class AddBookService {
     const book = await this.booksRepo.findByName(addBookDto.name);
 
     if (book) {
-      throw new ConflictException('there is already a book with that name');
+      throw new ConflictException('there is already a book with that name.');
     }
     const bookCreated = await this.booksRepo.add(addBookDto);
 

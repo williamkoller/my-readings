@@ -25,7 +25,7 @@ export class AuthService {
     );
 
     if (!passwordIsValid) {
-      throw new UnauthorizedException('Incorrect email or password');
+      throw new UnauthorizedException('incorrect email or password.');
     }
 
     const accessToken = await this.jwtAdapter.encrypt(user);

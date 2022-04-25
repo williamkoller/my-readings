@@ -10,7 +10,7 @@ export class FindUserByIdService {
     const userFound = await this.usersRepo.findById(_id);
 
     if (!userFound) {
-      throw new NotFoundException('user not found');
+      throw new NotFoundException('user not found.');
     }
 
     return userFound;

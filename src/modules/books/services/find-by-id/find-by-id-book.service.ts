@@ -10,7 +10,7 @@ export class FindByIdBookService {
     const bookFound = await this.booksRepo.findById(_id);
 
     if (!bookFound) {
-      throw new NotFoundException('book not found');
+      throw new NotFoundException('book not found.');
     }
 
     return bookFound;

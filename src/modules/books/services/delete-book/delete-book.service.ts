@@ -13,7 +13,7 @@ export class DeleteBookService {
     const bookFound = await this.findByIdBookService.findById(_id);
     await this.booksRepo.delete(bookFound._id);
     return {
-      message: 'Book deleted with successfully',
+      message: 'book deleted with successfully',
     };
   }
 }

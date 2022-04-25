@@ -10,7 +10,7 @@ export class FindUserByEmailService {
     const userFound = await this.usersRepo.findByEmail(email);
 
     if (!userFound) {
-      throw new NotFoundException('user not found');
+      throw new NotFoundException('user not found.');
     }
 
     return userFound;
