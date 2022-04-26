@@ -29,7 +29,7 @@ Next step:
 - [x] add queue with bull
 - [x] add rate limiting
 - [x] add logging
-- [ ] add GraphQL
+- [x] add GraphQL
 - [ ] add file procfile for deploy heroku
 
 Made with 🖤 by [williamkoller](https://github.com/williamkoller) :wave:
