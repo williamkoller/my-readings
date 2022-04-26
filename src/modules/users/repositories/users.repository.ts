@@ -4,6 +4,7 @@ import { User, UserDocument } from '@/modules/users/schemas/user.schema';
 import { Model } from 'mongoose';
 import { propertyFalseMongo } from '@/utils/property-false-mongo';
 import { AddUserDto } from '@/modules/users/dtos/add-user.dto';
+import { UpdateUserDto } from '../dtos/update-user.dto';
 
 @Injectable()
 export class UsersRepository {
@@ -17,11 +18,11 @@ export class UsersRepository {
   }
 
   async findByEmail(email: string): Promise<User> {
-    return await this.userModel.findOne({ email: { $eq: email } }, propertyFalseMongo);
+    return await this.userModel.findOne({ email }, propertyFalseMongo);
   }
 
   async findById(_id: string): Promise<User> {
-    return await this.userModel.findOne({ _id: { $eq: _id } }, propertyFalseMongo);
+    return await this.userModel.findOne({ _id }, propertyFalseMongo);
   }
 
   async findAll(): Promise<User[]> {
@@ -32,11 +33,22 @@ export class UsersRepository {
 
   async uploadFile(_id: string, avatar: string): Promise<User> {
     return await this.userModel.findOneAndUpdate(
-      { _id: { $eq: _id } },
+      { _id },
       {
         avatar,
         updatedAt: Date.now(),
       },
+      {
+        new: true,
+        propertyFalseMongo,
+      },
+    );
+  }
+
+  async update(_id: string, updateBookDto: UpdateUserDto): Promise<User> {
+    return await this.userModel.findOneAndUpdate(
+      { _id },
+      { ...updateBookDto },
       {
         new: true,
         propertyFalseMongo,

@@ -22,13 +22,16 @@ export class BooksRepository {
   }
 
   async findByName(name: string): Promise<Book> {
-    return await this.bookModel.findOne({ name: { $eq: name} }, propertyFalseMongo);
+    return await this.bookModel.findOne(
+      { name: { $eq: name } },
+      propertyFalseMongo,
+    );
   }
 
   async update(_id: string, updateBookDto: UpdateBookDto): Promise<Book> {
     return await this.bookModel.findOneAndUpdate(
       { _id: { $eq: _id } },
-      { $regex: /updateBookDto/ },
+      { $regex: `/${updateBookDto}/` },
       {
         new: true,
         propertyFalseMongo,
@@ -37,7 +40,10 @@ export class BooksRepository {
   }
 
   async findById(_id: string): Promise<Book> {
-    return await this.bookModel.findOne({ _id: { $eq: _id } }, propertyFalseMongo);
+    return await this.bookModel.findOne(
+      { _id: { $eq: _id } },
+      propertyFalseMongo,
+    );
   }
 
   async delete(_id: string): Promise<void> {
