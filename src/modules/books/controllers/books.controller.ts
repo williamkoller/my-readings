@@ -21,7 +21,6 @@ import { UpdateBookDto } from '@/modules/books/dtos/update-book.dto';
 import { UpdateBookService } from '@/modules/books/services/update-book/update-book.service';
 import { DeleteBookService } from '@/modules/books/services/delete-book/delete-book.service';
 import { ApiBasicAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { BookOutputType } from '@/modules/books/types/book-output.type';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 import { Cache } from 'cache-manager';
 import { ProcessBook } from '../process/books.process';
@@ -51,7 +50,7 @@ export class BooksController {
     status: HttpStatus.CONFLICT,
     description: 'there is already a book with that name.',
   })
-  async add(@Body() addBookDto: AddBookDto): Promise<BookOutputType> {
+  async add(@Body() addBookDto: AddBookDto): Promise<Book> {
     return await this.addBookService.add(addBookDto);
   }
 
@@ -65,7 +64,7 @@ export class BooksController {
     status: HttpStatus.NOT_FOUND,
     description: 'no record found.',
   })
-  async index(): Promise<BookOutputType[] | number> {
+  async index(): Promise<Book[] | number> {
     return await this.findAllBooksService.findAll();
   }
 

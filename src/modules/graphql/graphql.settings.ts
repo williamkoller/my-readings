@@ -1,8 +1,11 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
 
 export const imports = [
-  GraphQLModule.forRoot({
-    autoSchemaFile: './schema.gql',
+  GraphQLModule.forRoot<ApolloDriverConfig>({
+    driver: ApolloDriver,
+    autoSchemaFile: join(process.cwd(), 'src/graphql/schema.gql'),
     debug: true,
     playground: true,
   }),
