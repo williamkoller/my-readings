@@ -18,11 +18,17 @@ export class UsersRepository {
   }
 
   async findByEmail(email: string): Promise<User> {
-    return await this.userModel.findOne({ email }, propertyFalseMongo);
+    return await this.userModel.findOne(
+      { email: { $eq: email } },
+      propertyFalseMongo,
+    );
   }
 
   async findById(_id: string): Promise<User> {
-    return await this.userModel.findOne({ _id }, propertyFalseMongo);
+    return await this.userModel.findOne(
+      { _id: { $eq: _id } },
+      propertyFalseMongo,
+    );
   }
 
   async findAll(): Promise<User[]> {
@@ -33,9 +39,9 @@ export class UsersRepository {
 
   async uploadFile(_id: string, avatar: string): Promise<User> {
     return await this.userModel.findOneAndUpdate(
-      { _id },
+      { _id: { $eq: _id } },
       {
-        avatar,
+        avatar: { $eq: avatar },
         updatedAt: Date.now(),
       },
       {
@@ -45,10 +51,10 @@ export class UsersRepository {
     );
   }
 
-  async update(_id: string, updateBookDto: UpdateUserDto): Promise<User> {
+  async update(_id: string, updateUserDto: UpdateUserDto): Promise<User> {
     return await this.userModel.findOneAndUpdate(
-      { _id },
-      { ...updateBookDto },
+      { _id: { $eq: _id } },
+      { $regex: `/${updateUserDto}/` },
       {
         new: true,
         propertyFalseMongo,
