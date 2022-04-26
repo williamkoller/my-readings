@@ -1,13 +1,11 @@
 import { Book } from '@/modules/books/schemas/book.schema';
-import { BookOutputType } from '@/modules/books/types/book-output.type';
-
-export const booksTransform = (books: Book[]): BookOutputType[] => {
+export const booksTransform = (books: Book[]): Book[] => {
   return books.map(bookTransform);
 };
 
-export const bookTransform = (book: Book): BookOutputType => {
+export const bookTransform = (book: Book): Book => {
   return {
-    id: book._id,
+    _id: book._id,
     name: book.name,
     description: book.description,
     author: book.author,

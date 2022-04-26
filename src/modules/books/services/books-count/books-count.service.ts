@@ -29,7 +29,7 @@ export class BooksCountService {
 
     offset = offset === undefined ? 0 : offset;
 
-    this.logger.log(`offset ${offset}.`);
+    this.logger.log(`offset ${JSON.stringify(offset)}.`);
 
     const countBooks = await this.booksRepository.countBooks(
       offset,
