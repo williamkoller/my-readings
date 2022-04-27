@@ -1,14 +1,12 @@
 import { GET_BOOKS_CACHE_KEY } from '@/modules/cache/constants/books-cache-key.constant';
 import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
 
+import { Cache } from 'cache-manager';
+
 @Injectable()
 export class CachesRepository {
-  constructor(@Inject(CACHE_MANAGER) private readonly cacheManager) {
-    const client = cacheManager.store.getClient();
-    client.on('err', (err) => {
-      console.info(err);
-    });
-  }
+  constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
+
   async clearCache(): Promise<void> {
     const keys: string[] = await this.cacheManager.store.keys();
 
@@ -24,6 +22,6 @@ export class CachesRepository {
   }
 
   async getCache(name: string): Promise<number> {
-    return await this.cacheManager.get(name);
+    return await this.cacheManager.get<number>(name);
   }
 }
