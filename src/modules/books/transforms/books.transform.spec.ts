@@ -15,12 +15,12 @@ const makeBook = (): Book => {
 };
 
 describe('booksTransform', () => {
-  test('should transform book to output', () => {
+  it('should transform book to output', () => {
     const book: Book = makeBook();
 
     const actual = bookTransform(book);
 
-    expect(actual.id).toBe(book._id);
+    expect(actual._id).toBe(book._id);
     expect(actual.name).toBe(book.name);
     expect(actual.description).toBe(book.description);
     expect(actual.author).toBe(book.author);
@@ -30,13 +30,13 @@ describe('booksTransform', () => {
     expect(actual.updatedAt).toStrictEqual(book.updatedAt);
   });
 
-  test('should transform books to output', () => {
+  it('should transform books to output', () => {
     const books: Book[] = [makeBook()];
 
     const actual = booksTransform(books);
 
     expect(actual.length).toBe(1);
-    expect(actual[0].id).toBe(books[0]._id);
+    expect(actual[0]._id).toBe(books[0]._id);
     expect(actual[0].name).toBe(books[0].name);
     expect(actual[0].description).toBe(books[0].description);
     expect(actual[0].author).toBe(books[0].author);
