@@ -6,6 +6,8 @@ export const imports = [
   BaseCacheModule.register({
     store: redisStore,
     url: process.env.REDIS_URL,
+    no_ready_check: true,
+    isGlobal: true,
   }),
 ];
 
