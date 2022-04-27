@@ -4,8 +4,10 @@ import { CachesRepository } from './repositories/caches.repository';
 export const imports = [
   BaseCacheModule.register({
     url: process.env.REDIS_URL,
-    no_ready_check: true,
-    isGlobal: true,
+    socket: {
+      tls: true,
+      rejectUnauthorized: false,
+    },
   }),
 ];
 
