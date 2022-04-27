@@ -22,7 +22,7 @@ export const imports = [
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: async (config: ConfigService) => ({
-      uri: config.get('mongoUrl'),
+      uri: config.get<string>('mongoUri'),
     }),
   }),
   ScheduleModule.forRoot(),

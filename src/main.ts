@@ -18,7 +18,7 @@ async function bootstrap() {
   swagger(app);
 
   const config = app.get<ConfigService>(ConfigService);
-  const port = config.get<string>('port');
+  const port = config.get<string>('port') ?? 3000;
   const nodeEnv = config.get<string>('nodeEnv');
 
   await app.listen(port, () =>

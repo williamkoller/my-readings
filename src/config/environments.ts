@@ -7,7 +7,7 @@ type EnvironmentType = {
   defaultStrategy: string;
   property: string;
   session: string;
-  mongoUrl: string;
+  mongoUri: string;
   redisHost: string;
   redisPort: number;
   redisAuthPass: string;
@@ -23,7 +23,7 @@ export const environments = (): EnvironmentType => {
     defaultStrategy: process.env.DEFAULT_STRATEGY,
     property: process.env.PROPERTY_USER,
     session: process.env.SESSION,
-    mongoUrl: process.env.MONGODB_URL,
+    mongoUri: process.env.MONGODB_URI,
     redisHost: process.env.REDIS_HOST,
     redisPort: Number(process.env.REDIS_PORT),
     redisAuthPass: process.env.REDIS_AUTH_PASS,
