@@ -1,7 +1,7 @@
 import { GET_BOOKS_CACHE_KEY } from '@/modules/cache/constants/books-cache-key.constant';
 import { CachesRepository } from '@/modules/cache/repositories/caches.repository';
 import { Injectable, Logger } from '@nestjs/common';
-import { Interval } from '@nestjs/schedule';
+import { Cron } from '@nestjs/schedule';
 import { BooksRepository } from '@/modules/books/repositories/books.repository';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
@@ -23,7 +23,7 @@ export class BooksCountService {
     private readonly booksQueue: Queue,
   ) {}
 
-  @Interval(5000)
+  @Cron('* 00 * * *')
   async countBooks() {
     let offset = await this.cachesRepository.getCache(GET_BOOKS_CACHE_KEY);
 
