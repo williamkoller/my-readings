@@ -4,7 +4,7 @@ import { AwsModule } from '@/modules/aws/aws.module';
 import { BooksModule } from '@/modules/books/books.module';
 import { UsersModule } from '@/modules/users/users.module';
 import { forwardRef } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CacheModule } from '@/modules/cache/cache.module';
 import { ScheduleModule } from '@nestjs/schedule';
@@ -18,13 +18,14 @@ export const imports = [
     envFilePath: envFolderPath.folderPath,
     load: [environments],
   }),
-  MongooseModule.forRootAsync({
-    imports: [ConfigModule],
-    inject: [ConfigService],
-    useFactory: async (config: ConfigService) => ({
-      uri: config.get<string>('mongoUri'),
-    }),
-  }),
+  // MongooseModule.forRootAsync({
+  //   imports: [ConfigModule],
+  //   inject: [ConfigService],
+  //   useFactory: async (config: ConfigService) => ({
+  //     uri: config.get<string>('mongoUri'),
+  //   }),
+  // }),
+  MongooseModule.forRoot(process.env.MONGODB_URI),
   ScheduleModule.forRoot(),
   forwardRef(() => BooksModule),
   forwardRef(() => UsersModule),
