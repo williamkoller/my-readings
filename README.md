@@ -30,6 +30,6 @@ Next step:
 - [x] add rate limiting
 - [x] add logging
 - [x] add GraphQL
-- [ ] add file procfile for deploy heroku
+- [x] add deploy with heroku
 
 Made with 🖤 by [williamkoller](https://github.com/williamkoller) :wave:
