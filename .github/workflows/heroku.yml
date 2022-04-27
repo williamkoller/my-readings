@@ -6,8 +6,9 @@ on:
       - main
       - master
   pull_request:
-    - main
-    - master
+    branchs:
+      - main
+      - master
 
 jobs:
   build:
