@@ -10,6 +10,7 @@ type EnvironmentType = {
   mongoUri: string;
   redisHost: string;
   redisPort: number;
+  redisAuthPass: string;
 };
 
 export const environments = (): EnvironmentType => {
@@ -25,6 +26,7 @@ export const environments = (): EnvironmentType => {
     mongoUri: process.env.MONGODB_URI,
     redisHost: process.env.REDIS_HOST,
     redisPort: Number(process.env.REDIS_PORT),
+    redisAuthPass: process.env.REDIS_AUTH_PASS,
   };
 };
 

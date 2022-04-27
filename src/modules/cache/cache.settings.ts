@@ -8,7 +8,12 @@ export const imports = [
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: async (config: ConfigService) => ({
-      store: redisStore,
+      store: redisStore.create({
+        auth_pass: config.get('redisAuthPass'),
+        host: config.get('redisHost'),
+        port: config.get('redisPort'),
+        no_ready_check: true,
+      }),
       host: config.get('redisHost'),
       port: config.get('redisPort'),
       ttl: 60 * 3600 * 1000,
