@@ -20,13 +20,13 @@ import { FindByIdBookService } from '@/modules/books/services/find-by-id/find-by
 import { UpdateBookDto } from '@/modules/books/dtos/update-book.dto';
 import { UpdateBookService } from '@/modules/books/services/update-book/update-book.service';
 import { DeleteBookService } from '@/modules/books/services/delete-book/delete-book.service';
-import { ApiBasicAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 import { Cache } from 'cache-manager';
 import { ProcessBook } from '../process/books.process';
 
 @ApiTags('books')
-@ApiBasicAuth()
+@ApiBearerAuth()
 @Controller('books')
 @UseGuards(JwtAuthGuard)
 export class BooksController {

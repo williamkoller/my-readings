@@ -14,7 +14,7 @@ import { User } from '@/modules/users/schemas/user.schema';
 import { AddUserService } from '@/modules/users/services/add-user/add-user.service';
 import { FindAllUsersService } from '../services/find-all-users/find-all-users.service';
 import { FindUserByIdService } from '../services/find-user-by-id/find-user-by-id.service';
-import { ApiBasicAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadAvatarService } from '../services/upload-avatar/upload-avatar.service';
@@ -43,7 +43,7 @@ export class UsersController {
   }
 
   @Get()
-  @ApiBasicAuth()
+  @ApiBearerAuth()
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'find all users.',
@@ -58,7 +58,7 @@ export class UsersController {
   }
 
   @Get(':_id')
-  @ApiBasicAuth()
+  @ApiBearerAuth()
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'find users by id.',
@@ -73,7 +73,7 @@ export class UsersController {
   }
 
   @Post('/:_id/upload')
-  @ApiBasicAuth()
+  @ApiBearerAuth()
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'upload file S3',
