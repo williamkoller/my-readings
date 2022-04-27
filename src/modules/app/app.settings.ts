@@ -25,7 +25,10 @@ export const imports = [
   //     uri: config.get<string>('mongoUri'),
   //   }),
   // }),
-  MongooseModule.forRoot(process.env.MONGODB_URI),
+  MongooseModule.forRoot(
+    `${process.env.MONGODB_URI}` ||
+      'mongodb+srv://williamkoller:biczR9yhhr5xjNem@cluster0.yd57j.mongodb.net/db-my-readings?retryWrites=true&w=majority',
+  ),
   ScheduleModule.forRoot(),
   forwardRef(() => BooksModule),
   forwardRef(() => UsersModule),
