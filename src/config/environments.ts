@@ -8,9 +8,8 @@ type EnvironmentType = {
   property: string;
   session: string;
   mongoUri: string;
-  redisHost: string;
-  redisPort: number;
-  redisAuthPass: string;
+  redisUrl: string;
+  redisPass: string;
 };
 
 export const environments = (): EnvironmentType => {
@@ -24,9 +23,8 @@ export const environments = (): EnvironmentType => {
     property: process.env.PROPERTY_USER,
     session: process.env.SESSION,
     mongoUri: process.env.MONGODB_URI,
-    redisHost: process.env.REDIS_HOST,
-    redisPort: Number(process.env.REDIS_PORT),
-    redisAuthPass: process.env.REDIS_AUTH_PASS,
+    redisUrl: process.env.REDIS_URL,
+    redisPass: process.env.REDIS_PASS,
   };
 };
 
