@@ -23,7 +23,7 @@ export class BooksCountService {
     private readonly booksQueue: Queue,
   ) {}
 
-  @Cron('* 00 * * *')
+  @Cron('* * * * 1')
   async countBooks() {
     let offset = await this.cachesRepository.getCache(GET_BOOKS_CACHE_KEY);
 
