@@ -1,12 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AddBookService } from './add-book.service';
-import { BooksRepository } from '../../repositories/books.repository';
+import { BooksRepository } from '@/modules/books/repositories/books.repository';
 import { CachesRepository } from '@/modules/cache/repositories/caches.repository';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule } from '@nestjs/config';
-import { Book, BookSchema } from '../../schemas/book.schema';
-import { CacheModule } from '@nestjs/common';
-import envFolderPath, { environments } from '@/config/environments';
+import { imports } from '@/modules/books/test/books.settings';
 
 describe('AddBookService', () => {
   let service: AddBookService;
@@ -15,21 +11,7 @@ describe('AddBookService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        ConfigModule.forRoot({
-          isGlobal: true,
-          envFilePath: envFolderPath.folderPath,
-          load: [environments],
-        }),
-        MongooseModule.forRoot(`${process.env.MONGODB_URI}`),
-        MongooseModule.forFeature([
-          {
-            name: Book.name,
-            schema: BookSchema,
-          },
-        ]),
-        CacheModule.register(),
-      ],
+      imports,
       providers: [AddBookService, BooksRepository, CachesRepository],
     }).compile();
 
