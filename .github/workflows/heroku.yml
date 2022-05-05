@@ -41,6 +41,11 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
+      - name: Publish to coveralls.io
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{github.token}}
+
       - name: Deploy application
         if: ${{ github.ref == 'refs/heads/master'  || github.ref == 'refs/heads/main' }}
         uses: akhileshns/heroku-deploy@v3.12.12
