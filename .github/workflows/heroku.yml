@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
+      - name: Generate Coverage
+        run: yarn test:cov
+
       - name: Publish to coveralls.io
         uses: coverallsapp/github-action@v1.1.2
         with:
