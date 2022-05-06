@@ -44,7 +44,7 @@ jobs:
       - name: Run install dependencies and running tests
         run: |
           yarn --frozen-lockfile
-          yarn test:ci
+          yarn test:cov
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
