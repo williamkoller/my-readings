@@ -44,12 +44,6 @@ jobs:
       - name: Run install dependencies and running tests
         run: |
           yarn --frozen-lockfile
-          yarn test:cov
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy application
         if: ${{ github.ref == 'refs/heads/master'  || github.ref == 'refs/heads/main' }}
