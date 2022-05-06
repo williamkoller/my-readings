@@ -4,11 +4,9 @@ on:
   push:
     branchs:
       - main
-      - master
   pull_request:
     branchs:
       - main
-      - master
 
 jobs:
   build:
