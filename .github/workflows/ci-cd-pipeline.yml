@@ -52,7 +52,7 @@ jobs:
         id: deploy
         run: |
           aws deploy create-deployment \
-            --application-name Git_Application \
+            --application-name Api_My_Readings \
             --deployment-group-name development_gropup \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
