@@ -2,9 +2,9 @@ name: 'CI/CD Pipeline'
 
 on:
   push:
-    branchs: [main]
+    branches: [main]
   pull_request:
-    branchs: [ main ]
+    branches: [main]
 
 jobs:
   continuous-integration:
