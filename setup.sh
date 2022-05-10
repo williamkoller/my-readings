@@ -1,4 +1,6 @@
 #!/bin/bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 . ~/.nvm/nvm.sh
-nvm install node
+nvm uninstall 18.1
+nvm install 16.14.2
+nvm use 16.14.2
