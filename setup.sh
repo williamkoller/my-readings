@@ -7,5 +7,4 @@ nvm use 16.14.2
 npm i -g yarn
 cd /home/ec2-user/my-readings
 yarn install
-yarn build 
 yarn start:prod
