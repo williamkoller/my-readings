@@ -3,6 +3,10 @@ name: 'CI/CD Pipeline'
 on:
   push:
     branchs: [main]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
 
 jobs:
   continuous-integration:
@@ -40,19 +44,17 @@ jobs:
     needs: [continuous-integration]
     if: github.ref == 'refs/heads/main'
     steps:
-      # Step 1
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      # Step 2
-      - name: Create CodeDeploy Deployment
-        id: deploy
-        run: |
-          aws deploy create-deployment \
-            --application-name My_Readings \
-            --deployment-group-name development_gropup \
-            --deployment-config-name CodeDeployDefault.OneAtATime \
-            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+
+     - name: Deploy EC2
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
