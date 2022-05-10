@@ -3,7 +3,7 @@ os: linux
 files:
   - source: .
     destination: /home/ec2-user/my-readings/
-  - source: ./package.json
+  - source: package.json
     destination: /home/ec2-user/my-readings/
 hooks:
   AfterInstall:
