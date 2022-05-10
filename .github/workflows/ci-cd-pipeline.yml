@@ -48,9 +48,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
      - name: Deploy EC2
-        uses: easingthemes/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: './'
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
