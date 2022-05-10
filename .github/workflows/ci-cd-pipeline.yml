@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: Deploy Heroku
-        if: github.ref == 'refs/heads/main
+        if: github.ref == refs/heads/main
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
