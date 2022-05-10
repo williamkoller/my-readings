@@ -4,7 +4,7 @@ on:
   push:
     branchs: [main]
   pull_request:
-    branches: [ master ]
+    branchs: [ main ]
 
 jobs:
   continuous-integration:
