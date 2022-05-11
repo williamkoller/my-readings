@@ -3,12 +3,20 @@ os: linux
 files:
   - source: .
     destination: /home/ec2-user/my-readings/
+    overwrite: true
+permissions:
+  - object: /home/ec2-user/my-readings/
+    pattern: "*.sh"
+    owner: root
+    group: root
+    mode: 755
+    type:
+      - file
+
 hooks:
   AfterInstall:
     - location: setup.sh
       timeout: 300
-      runas: root
   ApplicationStart:
     - location: run.sh
       timeout: 300
-      runas: root
