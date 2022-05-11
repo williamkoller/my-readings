@@ -3,6 +3,8 @@ name: 'CI/CD Pipeline'
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   continuous-integration:
@@ -38,12 +40,21 @@ jobs:
   continuous-deployment:
     runs-on: ubuntu-latest
     needs: [continuous-integration]
+    if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Deploy Heroku
-        if: github.ref == 'refs/heads/main'
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Create CodeDeploy Deployment
+        id: deploy
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ secrets.APP_NAME }} \
+            --deployment-group-name ${{ secrets.DEPLOYMENT_GROUP_NAME }} \
+            --deployment-config-name ${{ secrets.DEPLOYMENT_CONFIG_NAME }} \
+            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
