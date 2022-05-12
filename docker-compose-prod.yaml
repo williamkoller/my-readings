@@ -7,6 +7,8 @@ services:
     container_name: api-my-readings
     restart: always
     entrypoint: sh -c "yarn install && yarn start:dev"
+    env_file:
+      - .env.aws
     environment:
       MONGODB_URI: ${MONGODB_URI}
       MONGODB_PORT: ${MONGODB_PORT}
@@ -28,6 +30,8 @@ services:
   mongodb:
     image: mongo:latest
     container_name: mongodb
+    env_file:
+      - .env.aws
     environment:
       MONGODB_URI: ${MONGODB_URI}
     volumes:
@@ -41,6 +45,8 @@ services:
     image: redis:latest
     container_name: redis
     restart: always
+    env_file:
+      - .env.aws
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - REDIS_PORT=6379
