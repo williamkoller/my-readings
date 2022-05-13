@@ -50,11 +50,3 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Create CodeDeploy Deployment
-        id: deploy
-        run: |
-          aws deploy create-deployment \
-            --application-name ${{ secrets.APP_NAME }} \
-            --deployment-group-name ${{ secrets.DEPLOYMENT_GROUP_NAME }} \
-            --deployment-config-name ${{ secrets.DEPLOYMENT_CONFIG_NAME }} \
-            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
