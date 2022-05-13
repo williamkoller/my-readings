@@ -1,22 +1,20 @@
 version: 0.0
 os: linux
 files:
-  - source: .
-    destination: /home/ec2-user/my-readings/
+  - source: /
+    destination: /home/ec2-user/my-readings
     overwrite: true
-permissions:
-  - object: /home/ec2-user/my-readings/
-    pattern: "*.sh"
-    owner: root
-    group: root
-    mode: 755
-    type:
-      - file
 
 hooks:
+  ApplicationStop:
+    - location: scripts/application_stop.sh
+      timeout: 300
+      runas: ec2-user
   AfterInstall:
-    - location: setup.sh
+    - location: scripts/after_install.sh
       timeout: 300
+      runas: ec2-user
   ApplicationStart:
-    - location: run.sh
+    - location: scripts/application_start.sh
       timeout: 300
+      runas: ec2-user
