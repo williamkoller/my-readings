@@ -6,15 +6,11 @@ files:
     overwrite: true
 
 hooks:
-  ApplicationStop:
-    - location: scripts/application_stop.sh
-      timeout: 300
-      runas: ec2-user
   AfterInstall:
     - location: scripts/after_install.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
   ApplicationStart:
     - location: scripts/application_start.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
