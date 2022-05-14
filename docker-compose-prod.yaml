@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   api-my-readings:
     build:
@@ -65,4 +65,4 @@ volumes:
 
 networks:
   app_network:
-    external: true
+    name: custom_network
