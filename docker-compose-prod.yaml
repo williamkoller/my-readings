@@ -66,3 +66,4 @@ volumes:
 networks:
   app_network:
     name: custom_network
+    external: true
