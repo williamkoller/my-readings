@@ -43,11 +43,9 @@ jobs:
     needs: [continuous-integration]
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Add Heroku remote
-        run: heroku git:remote -a api-my-readings
-      
-      - name: Deploy to heroku
-        run: git push heroku main
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
