@@ -5,7 +5,7 @@ export const swagger = (app: NestExpressApplication): void => {
   const config = new DocumentBuilder()
     .setTitle('My Readings Example')
     .setDescription('My Readings API description')
-    .setVersion('0.0.1')
+    .setVersion('2.0.2')
     .addTag('auth')
     .addTag('books')
     .addTag('users')
