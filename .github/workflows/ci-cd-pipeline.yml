@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Add Heroku remote
-        run: git remote add heroku https://git.heroku.com/api-my-readings.git
+        run: heroku git:remote -a api-my-readings
       
       - name: Deploy to heroku
         run: git push heroku main
