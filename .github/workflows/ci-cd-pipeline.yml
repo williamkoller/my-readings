@@ -48,8 +48,6 @@ jobs:
 
       - name: Add Heroku remote
         run: git remote add heroku https://git.heroku.com/api-my-readings.git
-        env:
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       
       - name: Deploy to heroku
         run: git push heroku main
