@@ -35,7 +35,7 @@
     "@nestjs/swagger": "^5.2.1",
     "@nestjs/throttler": "^2.0.1",
     "apollo-server-express": "^3.6.7",
-    "aws-sdk": "^2.1123.0",
+    "aws-sdk": "^2.1148.0",
     "bcrypt": "^5.0.1",
     "bull": "^4.8.2",
     "cache-manager": "^3.6.1",
